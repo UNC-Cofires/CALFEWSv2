@@ -1106,7 +1106,7 @@ struct __pyx_opt_args_11calfews_src_8model_cy_5Model_northern_initialization_rou
 struct __pyx_opt_args_11calfews_src_8model_cy_5Model_southern_initialization_routine;
 struct __pyx_opt_args_11calfews_src_8model_cy_5Model_initialize_water_districts;
 
-/* "model_cy.pxd":72
+/* "model_cy.pxd":76
  *   cdef (double, double) delivery_recovery(self, list contract_list, Canal canal, lookback_range, int starting_point, dict paper_fractions, double direct_recovery, str flow_dir, list type_list, list priority_list, str contract_canal, str delivery_loc_name, int dowy, int wateryear, list canals_passed_through) except *
  * 
  *   cdef (double, double) flood_operations(self, int t, int m, int dowy, int wateryear, Reservoir reservoir, str flow_type, int overflow_toggle, str wyt, double prev_flood_release, str message=*) except *             # <<<<<<<<<<<<<<
@@ -1118,7 +1118,7 @@ struct __pyx_opt_args_11calfews_src_8model_cy_5Model_flood_operations {
   PyObject *message;
 };
 
-/* "model_cy.pxd":84
+/* "model_cy.pxd":88
  *   cdef void set_canal_direction(self, str flow_type)
  * 
  *   cdef (int, int, int, int, double, double) simulate_south(self, int t, double hro_pump, double trp_pump, double swp_alloc, double cvp_alloc, dict proj_surplus, dict max_pumping, double swp_forgone, double cvp_forgone, double swp_AF, double cvp_AF, double swp_AS, double cvp_AS, str wyt, str wytSC, dict max_tax_free, dict flood_release, dict flood_volume) except *             # <<<<<<<<<<<<<<
@@ -1134,7 +1134,7 @@ struct __pyx_ctuple_int__and_int__and_int__and_int__and_double__and_double {
   double f5;
 };
 
-/* "model_cy.pxd":104
+/* "model_cy.pxd":108
  *   cdef tuple proj_gains(self, int t, int dowy, int m, int year_index)
  * 
  *   cdef (int, int, double, double, double) find_pumping_release(self, int m, int da, int year_index, int start_storage, dict month_demand, dict month_demand_must_fill, dict expected_pumping, double projected_carryover, double current_carryover, str wyt, int t, str key)             # <<<<<<<<<<<<<<
@@ -1149,7 +1149,7 @@ struct __pyx_ctuple_int__and_int__and_double__and_double__and_double {
   double f4;
 };
 
-/* "model_cy.pxd":107
+/* "model_cy.pxd":111
  * 
  * ######### init
  *   cdef tuple northern_initialization_routine(self, str initial_condition, scenario=*)             # <<<<<<<<<<<<<<
@@ -1161,19 +1161,19 @@ struct __pyx_opt_args_11calfews_src_8model_cy_5Model_northern_initialization_rou
   PyObject *scenario;
 };
 
-/* "model_cy.pxd":113
+/* "model_cy.pxd":117
  *   cdef void initialize_delta_ops(self) except *
  * 
  *   cdef void southern_initialization_routine(self, str initial_condition, scenario=*) except *             # <<<<<<<<<<<<<<
  * 
- *   cdef void initialize_southern_res(self,  initial_condition) except *
+ *   cdef void initialization_routine(self, str initial_condition)
  */
 struct __pyx_opt_args_11calfews_src_8model_cy_5Model_southern_initialization_routine {
   int __pyx_n;
   PyObject *scenario;
 };
 
-/* "model_cy.pxd":121
+/* "model_cy.pxd":127
  *   cdef void predict_delta_gains(self) except *
  * 
  *   cdef void initialize_water_districts(self, scenario=*) except *             # <<<<<<<<<<<<<<
@@ -1720,8 +1720,8 @@ struct __pyx_obj_11calfews_src_14participant_cy_Participant {
 };
 
 
-/* "model_cy.pxd":11
- * 
+/* "model_cy.pxd":12
+ * from .metropolitan_system import MetModel
  * 
  * cdef class Model():             # <<<<<<<<<<<<<<
  * 
@@ -1745,6 +1745,7 @@ struct __pyx_obj_11calfews_src_8model_cy_Model {
   int use_sensitivity;
   PyObject *model_mode;
   PyObject *demand_type;
+  PyObject *model_name;
   PyObject *df;
   PyObject *day_year;
   PyObject *day_month;
@@ -1821,6 +1822,7 @@ struct __pyx_obj_11calfews_src_8model_cy_Model {
   struct __pyx_obj_11calfews_src_12reservoir_cy_Reservoir *success;
   struct __pyx_obj_11calfews_src_12reservoir_cy_Reservoir *kaweah;
   struct __pyx_obj_11calfews_src_12reservoir_cy_Reservoir *pineflat;
+  struct __pyx_obj_11calfews_src_12reservoir_cy_Reservoir *trinity;
   struct __pyx_obj_11calfews_src_8delta_cy_Delta *delta;
   struct __pyx_obj_11calfews_src_8canal_cy_Canal *fkc;
   struct __pyx_obj_11calfews_src_8canal_cy_Canal *madera;
@@ -1892,6 +1894,32 @@ struct __pyx_obj_11calfews_src_8model_cy_Model {
   struct __pyx_obj_11calfews_src_11district_cy_District *sanluiswater;
   struct __pyx_obj_11calfews_src_11district_cy_District *panoche;
   struct __pyx_obj_11calfews_src_11district_cy_District *delpuerto;
+  struct __pyx_obj_11calfews_src_11district_cy_District *anaheim;
+  struct __pyx_obj_11calfews_src_11district_cy_District *beverlyhills;
+  struct __pyx_obj_11calfews_src_11district_cy_District *burbank;
+  struct __pyx_obj_11calfews_src_11district_cy_District *compton;
+  struct __pyx_obj_11calfews_src_11district_cy_District *fullerton;
+  struct __pyx_obj_11calfews_src_11district_cy_District *glendale;
+  struct __pyx_obj_11calfews_src_11district_cy_District *longbeach;
+  struct __pyx_obj_11calfews_src_11district_cy_District *losangeles;
+  struct __pyx_obj_11calfews_src_11district_cy_District *pasadena;
+  struct __pyx_obj_11calfews_src_11district_cy_District *sanfernando;
+  struct __pyx_obj_11calfews_src_11district_cy_District *sanmarino;
+  struct __pyx_obj_11calfews_src_11district_cy_District *santaana;
+  struct __pyx_obj_11calfews_src_11district_cy_District *santamonica;
+  struct __pyx_obj_11calfews_src_11district_cy_District *torrance;
+  struct __pyx_obj_11calfews_src_11district_cy_District *calleguas;
+  struct __pyx_obj_11calfews_src_11district_cy_District *centralbasin;
+  struct __pyx_obj_11calfews_src_11district_cy_District *eastern;
+  struct __pyx_obj_11calfews_src_11district_cy_District *foothill;
+  struct __pyx_obj_11calfews_src_11district_cy_District *inlandempire;
+  struct __pyx_obj_11calfews_src_11district_cy_District *lasvirgenes;
+  struct __pyx_obj_11calfews_src_11district_cy_District *orangecounty;
+  struct __pyx_obj_11calfews_src_11district_cy_District *sandiegocounty;
+  struct __pyx_obj_11calfews_src_11district_cy_District *threevalleys;
+  struct __pyx_obj_11calfews_src_11district_cy_District *westbasin;
+  struct __pyx_obj_11calfews_src_11district_cy_District *riversidecounty;
+  struct __pyx_obj_11calfews_src_11district_cy_District *uppersangabriel;
   struct __pyx_obj_11calfews_src_10private_cy_Private *wonderful;
   struct __pyx_obj_11calfews_src_10private_cy_Private *metropolitan;
   struct __pyx_obj_11calfews_src_10private_cy_Private *castaic;
@@ -2197,8 +2225,8 @@ struct __pyx_vtabstruct_11calfews_src_14participant_cy_Participant {
 static struct __pyx_vtabstruct_11calfews_src_14participant_cy_Participant *__pyx_vtabptr_11calfews_src_14participant_cy_Participant;
 
 
-/* "model_cy.pxd":11
- * 
+/* "model_cy.pxd":12
+ * from .metropolitan_system import MetModel
  * 
  * cdef class Model():             # <<<<<<<<<<<<<<
  * 
@@ -2234,6 +2262,7 @@ struct __pyx_vtabstruct_11calfews_src_8model_cy_Model {
   void (*initialize_northern_res)(struct __pyx_obj_11calfews_src_8model_cy_Model *, PyObject *);
   void (*initialize_delta_ops)(struct __pyx_obj_11calfews_src_8model_cy_Model *);
   void (*southern_initialization_routine)(struct __pyx_obj_11calfews_src_8model_cy_Model *, PyObject *, struct __pyx_opt_args_11calfews_src_8model_cy_5Model_southern_initialization_routine *__pyx_optional_args);
+  void (*initialization_routine)(struct __pyx_obj_11calfews_src_8model_cy_Model *, PyObject *);
   void (*initialize_southern_res)(struct __pyx_obj_11calfews_src_8model_cy_Model *, PyObject *);
   void (*project_urban)(struct __pyx_obj_11calfews_src_8model_cy_Model *, PyObject *, PyObject *, PyObject *);
   void (*predict_delta_gains)(struct __pyx_obj_11calfews_src_8model_cy_Model *);
@@ -40683,11 +40712,11 @@ static int __Pyx_modinit_type_import_code(void) {
    if (!__pyx_ptype_11calfews_src_14participant_cy_Participant) __PYX_ERR(10, 8, __pyx_L1_error)
   __pyx_vtabptr_11calfews_src_14participant_cy_Participant = (struct __pyx_vtabstruct_11calfews_src_14participant_cy_Participant*)__Pyx_GetVtable(__pyx_ptype_11calfews_src_14participant_cy_Participant->tp_dict); if (unlikely(!__pyx_vtabptr_11calfews_src_14participant_cy_Participant)) __PYX_ERR(10, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("calfews_src.model_cy"); if (unlikely(!__pyx_t_1)) __PYX_ERR(11, 11, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("calfews_src.model_cy"); if (unlikely(!__pyx_t_1)) __PYX_ERR(11, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_11calfews_src_8model_cy_Model = __Pyx_ImportType(__pyx_t_1, "calfews_src.model_cy", "Model", sizeof(struct __pyx_obj_11calfews_src_8model_cy_Model), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_11calfews_src_8model_cy_Model) __PYX_ERR(11, 11, __pyx_L1_error)
-  __pyx_vtabptr_11calfews_src_8model_cy_Model = (struct __pyx_vtabstruct_11calfews_src_8model_cy_Model*)__Pyx_GetVtable(__pyx_ptype_11calfews_src_8model_cy_Model->tp_dict); if (unlikely(!__pyx_vtabptr_11calfews_src_8model_cy_Model)) __PYX_ERR(11, 11, __pyx_L1_error)
+   if (!__pyx_ptype_11calfews_src_8model_cy_Model) __PYX_ERR(11, 12, __pyx_L1_error)
+  __pyx_vtabptr_11calfews_src_8model_cy_Model = (struct __pyx_vtabstruct_11calfews_src_8model_cy_Model*)__Pyx_GetVtable(__pyx_ptype_11calfews_src_8model_cy_Model->tp_dict); if (unlikely(!__pyx_vtabptr_11calfews_src_8model_cy_Model)) __PYX_ERR(11, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;

@@ -147,10 +147,16 @@ cdef class main_cy():
     ### setup northern & southern models & run initialization
     PyErr_CheckSignals()
     if True:
-      self.modelno = Model(input_data_file, expected_release_datafile, self.model_mode, demand_type)
+      self.modelno = Model(input_data_file, expected_release_datafile, self.model_mode, demand_type, 'modelno')
     PyErr_CheckSignals()
     if True:
-      self.modelso = Model(input_data_file, expected_release_datafile, self.model_mode, demand_type)
+      self.modelso = Model(input_data_file, expected_release_datafile, self.model_mode, demand_type, 'modelso')
+    if True:
+      self.trinity = Model(input_data_file, expected_release_datafile, self.model_mode, demand_type, 'trinity')
+    if True:
+      self.metropolitan = Model(input_data_file, expected_release_datafile, self.model_mode, demand_type, 'metropolitan')
+
+
     PyErr_CheckSignals()
     if True:
       self.modelso.max_tax_free = {}
@@ -159,14 +165,15 @@ cdef class main_cy():
     if True:
       self.modelso.forecastSRI = self.modelno.delta.forecastSRI
       self.modelso.southern_initialization_routine(initial_condition, scenario)   #add initial_condition 
+      self.trinity.initialization_routine(initial_condition)
+      self.metropolitan.initialization_routine(initial_condition)
       #try:
         #remove input data file (only if created for simulation), since data will be stored more efficiently in hdf5
         #os.remove(self.results_folder + '/' + new_inputs.export_series[self.flow_input_type][self.flow_input_source]  + "_0.csv")
       #except:
         #pass
     gc.collect()
-    use_validation_init = True
-    if use_validation_init:    
+    if self.model_mode == 'simulation':    
       self.modelso.initialize_district_contract_carryovers()
 
     return 0

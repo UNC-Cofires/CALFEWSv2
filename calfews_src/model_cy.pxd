@@ -6,7 +6,8 @@ from .private_cy cimport Private
 from .waterbank_cy cimport Waterbank
 from .contract_cy cimport Contract
 from .participant_cy cimport Participant
-
+from .trinity_system import TrinityModel
+from .metropolitan_system import MetModel
 
 cdef class Model():
  
@@ -19,7 +20,7 @@ cdef class Model():
 
     public bint use_sensitivity
 
-    public str model_mode, demand_type
+    public str model_mode, demand_type, model_name
 
     public list df, day_year, day_month, month, year, dowy, water_year, df_short, short_day_year, short_day_month, short_month, \
                 short_year, short_dowy, short_water_year, short_days_in_month, days_in_month, dowy_eom, leap, \
@@ -35,7 +36,7 @@ cdef class Model():
 
 
     public Reservoir shasta, oroville, folsom, yuba, newmelones, donpedro, exchequer, millerton, sanluisstate, sanluisfederal, \
-                sanluis, isabella, success, kaweah, pineflat
+                sanluis, isabella, success, kaweah, pineflat, trinity
 
     public Delta delta 
 
@@ -47,14 +48,17 @@ cdef class Model():
                 lindmore, lindsay, lowertule, porterville, saucelito, shaffer, sosanjoaquin, teapot, terra, tulare, fresno, \
                 fresnoid, socal, southbay, centralcoast, dudleyridge, tularelake, westlands, chowchilla, maderairr, othertule,\
                 otherkaweah, otherfriant, othercvp, otherexchange, othercrossvalley, otherswp, consolidated, alta, krwa, \
-                kaweahdelta, sanluiswater, panoche, delpuerto
+                kaweahdelta, sanluiswater, panoche, delpuerto, anaheim, beverlyhills, burbank, compton, fullerton, glendale, \
+                longbeach, losangeles, pasadena, sanfernando, sanmarino, santaana, santamonica, torrance, calleguas, \
+                centralbasin, eastern, foothill, inlandempire, lasvirgenes, orangecounty, sandiegocounty, threevalleys, \
+                westbasin, riversidecounty, uppersangabriel
 
     public Private wonderful, metropolitan, castaic, coachella
 
     public Waterbank stockdale, kernriverbed, poso, pioneer, kwb, berrendawb, b2800, wkwb, irvineranch, northkernwb, aewb, northfriantwb, centralfriantwb
 
     public Contract friant1, friant2, swpdelta, cvpdelta, cvpexchange, crossvalley, kernriver, tuleriver, kaweahriver, kingsriver
-
+    
   cdef dict search_canal_demand(self, int dowy, Canal canal, str prev_canal, str contract_canal, str flow_dir, str flow_type, int wateryear, str search_type, dict existing_deliveries, list canals_passed_through)   
 
   cdef tuple distribute_canal_deliveries(self, int dowy, Canal canal, str prev_canal, str contract_canal, double available_flow, int canal_size, int wateryear, str flow_dir, str flow_type, str search_type, list canals_passed_through)
@@ -111,6 +115,8 @@ cdef class Model():
   cdef void initialize_delta_ops(self) except *
 
   cdef void southern_initialization_routine(self, str initial_condition, scenario=*) except *
+  
+  cdef void initialization_routine(self, str initial_condition)
 
   cdef void initialize_southern_res(self,  initial_condition) except *
 

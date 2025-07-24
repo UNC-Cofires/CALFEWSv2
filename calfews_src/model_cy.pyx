@@ -17,16 +17,19 @@ from .private_cy cimport Private
 from .waterbank_cy cimport Waterbank
 from .contract_cy cimport Contract
 from .participant_cy cimport Participant
+import calfews_src.trinity_system as tntsys
+import calfews_src.metropolitan_system as mwdsys
 from collections import Counter
 
 
 cdef class Model():
  
-  def __init__(self, input_data_file, expected_release_datafile, model_mode, demand_type, sensitivity_sample_number=-1, sensitivity_sample_names=[], sensitivity_sample=[], sensitivity_factors = None):
+  def __init__(self, input_data_file, expected_release_datafile, model_mode, demand_type, model_name, sensitivity_sample_number=-1, sensitivity_sample_names=[], sensitivity_sample=[], sensitivity_factors = None):
     ##Set model dataset & index length
     self.df = []
     self.df.append(pd.read_csv(input_data_file, index_col=0, parse_dates=True))
     self.model_mode = model_mode
+    self.model_name = model_name 
     self.demand_type = demand_type
     self.T = len(self.df[0])
     self.day_year = [int(_) for _ in self.df[0].index.dayofyear]
@@ -190,6 +193,16 @@ cdef class Model():
     # how much flood water can be released and 'taken' by a contractor
     self.find_all_triggers()
 
+  cdef void initialization_routine(self, str initial_condition):
+    if self.model_name == 'trinity':
+      attribute_dict = tntsys.initialization_routine(self, initial_condition)
+      for attr in attribute_dict:
+        setattr(self,attr,attribute_dict[attr])
+
+    elif self.model_name == 'metropolitan':
+      attribute_dict = mwdsys.initialization_routine(self, initial_condition)
+      for attr in attribute_dict:
+        setattr(self,attr,attribute_dict[attr])
 
 
   cdef void initialize_northern_res(self, initial_condition) except *:
